@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="text-center mb-4">Lista de Episódios</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col" class="text-center">Data de Lançamento</th>
+                <th scope="col" class="text-center">Código do Episódio</th>
+                <th scope="col" class="text-center">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for episode in episodes %}
+            <tr>
+                <th scope="row" class="text-center">{{ loop.index }}</th>
+                <td>{{ episode.name }}</td>
+                <td class="text-center">{{ episode.air_date }}</td>
+                <td class="text-center">{{ episode.episode }}</td>
+                <td class="text-center">
+                    <a href="/episode/{{episode.id}}" class="btn btn-primary btn-sm">Ver Perfil</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

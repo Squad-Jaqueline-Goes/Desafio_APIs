@@ -41,3 +41,24 @@ def get_list_characters():
         characters.append(character)
 
     return {"characters": characters}
+
+
+@app.route("/episodes")
+def get_list_episodes():
+    url = "https://rickandmortyapi.com/api/episode/"
+    response = urllib.request.urlopen(url)
+    episodes = response.read()
+    dict = json.loads(episodes)
+
+    episodes = []
+
+    for episode in dict["results"]:
+        episode = {
+            "id": episode["id"],
+            "name": episode["name"],
+            "air_date": episode["air_date"],   
+            "episode": episode["episode"],   
+        }
+        episodes.append(episode)
+
+    return render_template("episodes.html", episodes=episodes)
