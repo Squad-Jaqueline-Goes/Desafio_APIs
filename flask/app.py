@@ -36,13 +36,43 @@ def get_list_characters():
     for character in dict["results"]:
         character = {
             "name": character["name"],
-            "status": character["status"],   
+            "status": character["status"],
         }
         characters.append(character)
 
     return {"characters": characters}
 
 
+# rota para location
+@app.route("/locations")
+def get_locations():  # função para listar as localizações
+    # var que recebera o valor da api
+    url = "https://rickandmortyapi.com/api/location"
+
+    # var que vai acessar a classe "urllib.request" para acessar a url
+    response = urllib.request.urlopen(url)
+
+    # var que fará a leitura dos resultados
+    locations = response.read()
+
+    # var para formatar os resultados no formato json
+    dict = json.loads(locations)
+
+    # dicionario de localizações
+    locations = []
+
+    for location in dict["results"]:
+        location = {
+            "id": location["id"],
+            "name": location["name"],
+            "type": location["type"],
+            "dimension": location["dimension"],
+        }
+        locations.append(location)
+        
+        #retorno da renderização da pag html com a lista de localizações
+        return render_template("locations.html", locations=locations)
+        
 @app.route("/episodes")
 def get_list_episodes():
     url = "https://rickandmortyapi.com/api/episode/"
@@ -56,8 +86,8 @@ def get_list_episodes():
         episode = {
             "id": episode["id"],
             "name": episode["name"],
-            "air_date": episode["air_date"],   
-            "episode": episode["episode"],   
+            "air_date": episode["air_date"],
+            "episode": episode["episode"],
         }
         episodes.append(episode)
 
