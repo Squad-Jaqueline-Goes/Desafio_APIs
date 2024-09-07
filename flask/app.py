@@ -3,7 +3,6 @@ import urllib.request, json
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def get_list_characters_page():
     url = "https://rickandmortyapi.com/api/character/"
