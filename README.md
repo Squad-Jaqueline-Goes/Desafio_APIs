@@ -55,5 +55,5 @@ Repositorio criado para resolução do Desafio de API utilizando Flask.
 
 Para rodar a aplicação, utilize o comando:
 ```bash
-flask --app app run
+flask --app app run --reload
 
