@@ -49,34 +49,42 @@ def get_list_characters():
 
 # rota para location
 @app.route("/locations")
-def get_locations():  # função para listar as localizações
-    # var que recebera o valor da api
+def get_locations():
+    # URL da API
     url = "https://rickandmortyapi.com/api/location"
 
-    # var que vai acessar a classe "urllib.request" para acessar a url
+    # Requisição para a URL
     response = urllib.request.urlopen(url)
-
-    # var que fará a leitura dos resultados
     locations = response.read()
 
-    # var para formatar os resultados no formato json
-    dict = json.loads(locations)
+    # Converte os resultados para o formato JSON
+    data = json.loads(locations)
 
-    # dicionario de localizações
+    # Lista de localizações
     locations = []
 
-    for location in dict["results"]:
-        location = {
+    for location in data["results"]:
+        location_info = {
             "id": location["id"],
             "name": location["name"],
             "type": location["type"],
             "dimension": location["dimension"],
         }
-        locations.append(location)
-        
-        #retorno da renderização da pag html com a lista de localizações
-        return render_template("locations.html", locations=locations)
-        
+        locations.append(location_info)
+
+    # Renderiza o template com a lista de localizações
+    return render_template("locations.html", locations=locations)
+
+# Rota para uma localização específica
+@app.route("/location/<id>")
+def get_location(id):
+    url = f"https://rickandmortyapi.com/api/location/{id}"
+    response = urllib.request.urlopen(url)
+    data = response.read()
+    dict = json.loads(data)
+    return render_template("location.html", location=dict)
+
+
 @app.route("/episodes")
 def get_list_episodes():
     url = "https://rickandmortyapi.com/api/episode/"
