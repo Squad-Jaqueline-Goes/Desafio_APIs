@@ -57,4 +57,3 @@ Para rodar a aplicação, utilize o comando:
 ```bash
 flask --app app run
 
-
