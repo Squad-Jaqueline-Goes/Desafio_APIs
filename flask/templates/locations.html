@@ -19,20 +19,10 @@
                         <p>{{ location.dimension }}</p>
                     </div>
                 </div>
-
-                <h4 class="mt-4">Residentes:</h4>
-                <ul class="list-group">
-                    {% for resident in location.residents %}
-                        <li class="list-group-item">
-                            <a href="/profile/{{ resident.split('/')[-1] }}" class="link-dark">
-                                Personagem {{ loop.index }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                    {% if location.residents|length == 0 %}
-                        <li class="list-group-item">Nenhum residente conhecido.</li>
-                    {% endif %}
-                </ul>
+                
+                <p>
+                    <a href="/location/{{ location.id }}" class="btn btn-primary btn-sm">Ver Perfil</a>
+                </p> 
             </div>
         {% endfor %}
     </div>
