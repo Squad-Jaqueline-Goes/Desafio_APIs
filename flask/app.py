@@ -84,6 +84,19 @@ def get_location(id):
     dict = json.loads(data)
     return render_template("location.html", location=dict)
 
+@app.route("/location/<id>")
+def get_location(id):
+    url = f"https://rickandmortyapi.com/api/location/{id}"
+    response = urllib.request.urlopen(url)
+    data = response.read()
+    location_data = json.loads(data)
+
+    # Adiciona a lista de residentes à localização
+    residents = location_data.get("residents", [])
+
+    return render_template("location.html", location=location_data, residents=residents)
+
+
 
 @app.route("/episodes")
 def get_list_episodes():
