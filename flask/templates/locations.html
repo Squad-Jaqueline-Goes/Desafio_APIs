@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="text-center mb-4">Localizações</h1>
+
+    <div class="row">
+        {% for location in locations %}
+            <div class="col-sm-12 mb-4">
+                <h2>{{ location.name }}</h2>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Tipo</h5>
+                        <p>{{ location.type }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Dimensão</h5>
+                        <p>{{ location.dimension }}</p>
+                    </div>
+                </div>
+                
+                <p>
+                    <a href="/location/{{ location.id }}" class="btn btn-primary btn-sm">Ver Perfil</a>
+                </p> 
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
